@@ -8,6 +8,7 @@ import { useParams } from 'react-router'
 
 export default function MangaDescription() {
     const [manga, setManga] = useState({})
+    const [myFckgImage, setMyFckgImage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const { id } = useParams()
 
@@ -16,7 +17,8 @@ export default function MangaDescription() {
             setIsLoading(true)
             const res = await Axios.get(`https://kitsu.io/api/edge/anime/${id}`)
             setManga(res.data.data.attributes)
-            // console.log(res.data.data.attributes)
+            setMyFckgImage(res.data.data.attributes.posterImage.large)
+            console.log(res.data.data.attributes.posterImage.large)
             setIsLoading(false)
         } catch (error) {
             console.log(error)
@@ -35,7 +37,7 @@ export default function MangaDescription() {
             <h1>Manga Description</h1>
             <CardMangaDescription
                 canonicalTitle={manga.canonicalTitle}
-                // posterImage={manga.coverImage.large}
+                posterImage={myFckgImage}
                 averageRating={manga.averageRating}
                 description={manga.description}
             />
