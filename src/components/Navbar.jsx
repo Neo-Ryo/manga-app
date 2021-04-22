@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { ThemingApp } from '../App'
 
 export default function Navbar() {
+    const { setMyTheme, myTheme } = useContext(ThemingApp)
     const [activeItem, setActiveItem] = useState('home')
 
     const handleItemClick = (name) => setActiveItem(name)
+
+    // useEffect(() => {
+    //     console.log('CONTEXT ==> ', setAppTheme)
+    // }, [])
 
     return (
         <div>
@@ -26,6 +32,12 @@ export default function Navbar() {
                         onClick={() => handleItemClick('contact')}
                     />
                 </Link>
+                <Menu.Menu position="right">
+                    <Menu.Item
+                        name={myTheme}
+                        onClick={() => setMyTheme('darkMode')}
+                    />
+                </Menu.Menu>
             </Menu>
         </div>
     )

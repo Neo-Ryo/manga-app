@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import './App.css'
 import MyRouter from './components/Router'
 
-function App() {
-    const [count, setCount] = useState(0)
+export const ThemingApp = createContext('lightMode')
 
+function App() {
+    const [myTheme, setMyTheme] = useState('lightMode')
+    useEffect(() => {
+        console.log(myTheme)
+    }, [])
     return (
-        <div className="App">
-            <MyRouter />
-        </div>
+        <ThemingApp.Provider value={{ setMyTheme, myTheme }}>
+            <div className={myTheme}>
+                <MyRouter />
+            </div>
+        </ThemingApp.Provider>
     )
 }
 

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Input, Container, Grid } from 'semantic-ui-react'
 import Axios from 'axios'
 import CardManga from './CardManga'
+import { ThemingApp } from '../App'
 
 export default function Home() {
-    const [inputValue, setInputValue] = useState('a')
+    const { myTheme } = useContext(ThemingApp)
+    const [inputValue, setInputValue] = useState('')
     const [mangas, setMangas] = useState([])
 
     const handleChangeInput = (e) => {
@@ -24,7 +26,7 @@ export default function Home() {
 
     return (
         <Container>
-            <h1>HOME</h1>
+            <h1>HOME {myTheme}</h1>
             <Input
                 placeholder="Search..."
                 value={inputValue}
