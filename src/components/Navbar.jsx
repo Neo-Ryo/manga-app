@@ -9,10 +9,6 @@ export default function Navbar() {
 
     const handleItemClick = (name) => setActiveItem(name)
 
-    // useEffect(() => {
-    //     console.log('CONTEXT ==> ', setAppTheme)
-    // }, [])
-
     return (
         <div>
             <Menu pointing secondary>

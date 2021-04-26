@@ -3,11 +3,12 @@ import Axios from 'axios'
 import { Container } from 'semantic-ui-react'
 import CardMangaDescription from './CardMangaDescription'
 import { useParams } from 'react-router'
+import styles from './Moncss.module.css'
 
 // https://kitsu.io/api/edge/anime/:id
 
 export default function MangaDescription() {
-    const [manga, setManga] = useState({})
+    const [manga, setManga] = useState({ canonical: '', posterImage: {} })
     const [myFckgImage, setMyFckgImage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const { id } = useParams()
@@ -17,7 +18,6 @@ export default function MangaDescription() {
             setIsLoading(true)
             const res = await Axios.get(`https://kitsu.io/api/edge/anime/${id}`)
             setManga(res.data.data.attributes)
-            setMyFckgImage(res.data.data.attributes.posterImage.large)
             console.log(res.data.data.attributes.posterImage.large)
             setIsLoading(false)
         } catch (error) {
@@ -34,10 +34,10 @@ export default function MangaDescription() {
     }
     return (
         <Container>
-            <h1>Manga Description</h1>
+            <h1 className={styles.maclasse}>Manga Description</h1>
             <CardMangaDescription
                 canonicalTitle={manga.canonicalTitle}
-                posterImage={myFckgImage}
+                posterImage={manga.posterImage.large}
                 averageRating={manga.averageRating}
                 description={manga.description}
             />
